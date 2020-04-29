@@ -3,7 +3,7 @@
  * Length: 100 lines.
  * Global support: 93.89% (https://caniuse.com/#feat=proxy)
  * Github: https://github.com/MathiasWP/TeroyJS
- * NPM: https://www.npmjs.com/package/Teroy
+ * NPM: https://www.npmjs.com/package/teroy
  * Creator: Mathias Picker.
  * License: MIT
  */
