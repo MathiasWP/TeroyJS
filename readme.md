@@ -43,7 +43,7 @@ TeroyJS is lightweight and very reactive.
 
 ## **_How do i use TeroyJS?_**
 
-TeroyJS's [API](#api) is very minimalistic and straight-forward (there are only so many features you can add with 100 lines of code). Here's an example of how to create a web-component with some different states:
+TeroyJS's [API](#api-) is very minimalistic and straight-forward (there are only so many features you can add with 100 lines of code). Here's an example of how to create a web-component with some different states:
 
 ```js
 const myComponent = new Teroy("#app", {
