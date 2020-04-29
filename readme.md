@@ -2,7 +2,7 @@
 
 ### _"Keepin' it vanilla."_
 
-[![Global support: 93.89%](https://img.shields.io/badge/global%20support-93.89%25-brightgreen)](https://caniuse.com/#feat=proxy)
+[![Global support: 93.89%](https://img.shields.io/badge/global%20support-93.89%25-brightgreen)](https://caniuse.com/#feat=proxy) ![GitHub file size in bytes](https://img.shields.io/github/size/MathiasWP/TeroyJS/Teroy.min.js) ![npm](https://img.shields.io/npm/v/teroy) 
 &nbsp;
 
 ## **_What is TeroyJS?_**
@@ -15,7 +15,7 @@ TeroyJS is a state-based component UI renderer library made up of 100 lines of c
 
 First of all, let me make one thing clear: this is **not** in any way a comparable alternative to other frameworks like React, Vue, Angular etc. However, TeroyJS is an option for the times when you can ask yourself: _"Do i really need a big framework like React or Vue for this small, simple thing(s)?"_
 
-TeroyJS focuses mainly on one thing: **size**. A minified TeroyJS takes only 1.53kb of space on your webpage, which clears up a lot of room for you beautiful code instead. TeroyJS also works silently behind the scenes with the power of JavaScript Proxies and will only update the nescessary DOM-components on state changes. In other words:
+TeroyJS focuses mainly on one thing: **size**. A minified TeroyJS takes only 1.56kb of space on your webpage, which clears up a lot of room for you beautiful code instead. TeroyJS also works silently behind the scenes with the power of JavaScript Proxies and will only update the nescessary DOM-components on state changes. In other words:
 
 TeroyJS is lightweight and very reactive.
 
@@ -23,13 +23,19 @@ TeroyJS is lightweight and very reactive.
 
 ## **_How do i install TeroyJS?_**
 
-### With npm:
+### With NPM 📦:
 
 #### `npm install teroy`
 
 &nbsp;
 
-### As a script tag:
+### With CDN 🌐:
+
+#### `<script src="https://cdn.jsdelivr.net/npm/teroy@0.0.3"></script>`
+
+&nbsp;
+
+### Locally 📁:
 
 #### `<script src="path/to/teroy.min.js"></script>`
 
