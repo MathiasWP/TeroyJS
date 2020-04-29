@@ -1,8 +1,9 @@
 /**
  * Teroy: The smallest JavaScript state-based component UI renderer - "Keepin' it Vanilla."
  * Length: 100 lines.
- * Global support: 93.89% (https://caniuse.com/#feat=proxy).
+ * Global support: 93.89% (https://caniuse.com/#feat=proxy)
  * Github: https://github.com/MathiasWP/TeroyJS
+ * NPM: https://www.npmjs.com/package/Teroy
  * Creator: Mathias Picker.
  * License: MIT
  */

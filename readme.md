@@ -45,7 +45,7 @@ const myComponent = new Teroy("#app", {
     return `<h1>${this.data.maintitle}</h1>
             <p id=${this.data.id}>Here's todays shopping list:</p>
             <ul>
-              ${this.data.object.list.map(listItem => `<li>${listItem}</li>`).join("")}
+              ${this.data.shoppingList.items.map(listItem => `<li>${listItem}</li>`).join("")}
             </ul>`;
   },
 
