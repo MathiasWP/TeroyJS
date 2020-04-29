@@ -1,0 +1,31 @@
+{
+  "name": "teroy",
+  "version": "0.0.3",
+  "description": "The smallest JavaScript state-based component UI renderer.",
+  "main": "Teroy.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "start": "node Teroy.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MathiasWP/TeroyJS.git"
+  },
+  "keywords": [
+    "state",
+    "component",
+    "ui",
+    "render",
+    "reactive",
+    "proxy",
+    "javascript"
+  ],
+  "author": "Mathias Picker",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MathiasWP/TeroyJS/issues"
+  },
+  "homepage": "https://github.com/MathiasWP/TeroyJS#readme"
+}
