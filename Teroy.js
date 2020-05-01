@@ -81,7 +81,7 @@
       const OLDDOMCHILDREN = Array.from(this.element.childNodes);
       const NEWDOMCHILDREN = Array.from(this.DOM.querySelector("body").childNodes);
 
-      const maxLength = Math.max(OLDDOMCHILDREN, NEWDOMCHILDREN);
+      const maxLength = Math.max(OLDDOMCHILDREN.length, NEWDOMCHILDREN.length);
 
       for (let i = 0; i < maxLength; i++) {
         if (!OLDDOMCHILDREN[i]) {
