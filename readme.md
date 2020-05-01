@@ -31,7 +31,7 @@ TeroyJS is very lightweight and reactive.
 
 ### With CDN 🌐:
 
-#### `<script src="https://cdn.jsdelivr.net/npm/teroy@0.0.5"></script>`
+#### `<script src="https://cdn.jsdelivr.net/npm/teroy@0.0.7"></script>`
 
 &nbsp;
 
