@@ -16,11 +16,9 @@
       if (!this.element) {
         throw `TEROY: ${element} not found.`;
       }
-
       if (!component.render || typeof component.render !== "function") {
         throw "TEROY: No render() function found in component.";
       }
-
       if (typeof component.render() !== "string") {
         throw "TEROY: Please make sure that the return from the render() function is wrapped in template literals (or any other string primitive).";
       }
@@ -32,7 +30,8 @@
         component: this,
         set(target, prop, val) {
           target[prop] = val;
-          return this.component.update();
+          this.component.update();
+          return true;
         },
         get(target, value) {
           if (this.component.proxyPaused) {
@@ -76,12 +75,13 @@
 
     update() {
       this.proxyPaused = true;
+
       this.DOM = this.parse(this.html.apply(this));
 
       const OLDDOMCHILDREN = Array.from(this.element.childNodes);
       const NEWDOMCHILDREN = Array.from(this.DOM.querySelector("body").childNodes);
 
-      const maxLength = Math.max(OLDDOMCHILDREN, NEWDOMCHILDREN);
+      const maxLength = Math.max(OLDDOMCHILDREN.length, NEWDOMCHILDREN.length);
 
       for (let i = 0; i < maxLength; i++) {
         if (!OLDDOMCHILDREN[i]) {

@@ -1,6 +1,6 @@
 {
   "name": "teroy",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "The smallest JavaScript state-based component UI renderer.",
   "main": "Teroy.min.js",
   "scripts": {
