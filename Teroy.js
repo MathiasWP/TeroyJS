@@ -73,38 +73,67 @@
       this.rendered = true;
     }
 
+    /**
+     * 
+     * @param {NamedNodeMap} newAttrs 
+     * @param {NamedNodeMap} oldAttrs 
+     * @param {Node} node
+     */
+    diffAttributes(newAttrs, oldAttrs, node) {
+      if (newAttrs === oldAttrs) return;
+      const allAttrs = new Set([...newAttrs, ...oldAttrs].map(i => i.name));
+
+      for (const attr of allAttrs) {
+        const o = oldAttrs.getNamedItem(attr);
+        const n = newAttrs.getNamedItem(attr);
+
+        if (!n) node.removeAttribute(attr)
+        else if (!o) node.setAttribute(attr, n.value);
+        else if (n.value !== o.value) node.setAttribute(attr, n.value);
+      }
+    }
+
+    /**
+     * 
+     * @param {Node} newNode 
+     * @param {Node} oldNode 
+     * @param {Node} root 
+     */
+    diff(newNode, oldNode, root) {
+      if (!oldNode) return root.appendChild(n);
+      if (!newNode) return root.removeChild(o);
+      if (newNode.isEqualNode(oldNode)) return;
+
+      const OLD_CHILDREN = oldNode.childNodes;
+      const NEW_CHILDREN = newNode.childNodes;
+      const MAX = Math.max(OLD_CHILDREN.length, NEW_CHILDREN.length);
+      let cur_idx = -1;
+
+      while (++cur_idx < MAX) {
+        const o = OLD_CHILDREN[cur_idx];
+        const n = NEW_CHILDREN[cur_idx];
+        
+        if (o === n || n.isEqualNode(o)) continue; // nodes are the same reference and value
+        if (!o) root.appendChild(n); // old not does not exist
+        else if (!n) root.removeChild(o); // new node does not exist
+        else if (n.nodeType !== o.nodeType || n.nodeName !== o.nodeName || n.nodeValue !== o.nodeValue) root.replaceChild(n, o); // nodes are of different type or name
+        else {
+            this.diffAttributes(n.attributes, o.attributes, o);
+            this.diff(n, o, o)
+        }
+      } 
+    }
+
     update() {
       this.proxyPaused = true;
 
       this.DOM = this.parse(this.html.apply(this));
+      this.diff(this.DOM.body, this.element, this.element);
 
-      const OLDDOMCHILDREN = Array.from(this.element.childNodes);
-      const NEWDOMCHILDREN = Array.from(this.DOM.querySelector("body").childNodes);
-
-      const maxLength = Math.max(OLDDOMCHILDREN.length, NEWDOMCHILDREN.length);
-
-      for (let i = 0; i < maxLength; i++) {
-        if (!OLDDOMCHILDREN[i]) {
-          this.element.appendChild(NEWDOMCHILDREN[i]);
-        } else if (!NEWDOMCHILDREN[i]) {
-          this.element.removeChild(OLDDOMCHILDREN[i]);
-        } else if (
-          NEWDOMCHILDREN[i].outerHTML !== OLDDOMCHILDREN[i].outerHTML ||
-          NEWDOMCHILDREN[i].wholeText !== OLDDOMCHILDREN[i].wholeText
-        ) {
-          this.element.replaceChild(NEWDOMCHILDREN[i], OLDDOMCHILDREN[i]);
-        }
-      }
       delete this.proxyPaused;
     }
   }
-  if (typeof define === "function" && define.amd) {
-    define(function () {
-      return Teroy;
-    });
-  } else if (typeof module !== "undefined" && module.exports) {
-    module.exports = Teroy;
-  } else {
-    this.Teroy = Teroy;
-  }
+  if (typeof define === "function" && define.amd) define(() => Teroy);
+  else if (typeof module !== "undefined" && module.exports) module.exports = Teroy;
+  else this.Teroy = Teroy;
 }.call(this));
