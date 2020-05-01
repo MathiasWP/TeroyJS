@@ -16,9 +16,11 @@
       if (!this.element) {
         throw `TEROY: ${element} not found.`;
       }
+
       if (!component.render || typeof component.render !== "function") {
         throw "TEROY: No render() function found in component.";
       }
+
       if (typeof component.render() !== "string") {
         throw "TEROY: Please make sure that the return from the render() function is wrapped in template literals (or any other string primitive).";
       }
@@ -80,8 +82,6 @@
 
       const OLDDOMCHILDREN = Array.from(this.element.childNodes);
       const NEWDOMCHILDREN = Array.from(this.DOM.querySelector("body").childNodes);
-
-      console.log(this.element, this.DOM.querySelector("body"));
 
       for (let i = 0; i < maxLength; i++) {
         if (!OLDDOMCHILDREN[i]) {
