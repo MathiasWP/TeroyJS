@@ -2,12 +2,12 @@
 
 ### _"Keepin' it vanilla."_
 
-[![Global support: 93.89%](https://img.shields.io/badge/global%20support-93.89%25-brightgreen)](https://caniuse.com/#feat=proxy) ![GitHub file size in bytes](https://img.shields.io/github/size/MathiasWP/TeroyJS/Teroy.min.js) ![npm](https://img.shields.io/npm/v/teroy) 
+[![Global support: 93.89%](https://img.shields.io/badge/global%20support-93.89%25-brightgreen)](https://caniuse.com/#feat=proxy) ![GitHub file size in bytes](https://img.shields.io/github/size/MathiasWP/TeroyJS/Teroy.min.js) ![npm](https://img.shields.io/npm/v/teroy)
 &nbsp;
 
 ## **_What is TeroyJS?_**
 
-TeroyJS is a state-based component UI renderer library made up of 100 lines of code; Create components with states, and watch how they automatically are updated in your GUI whenever they are updated.
+TeroyJS is a state-based component UI renderer library made up of 100 lines of code; Create components with states, and watch how they automatically are update in your GUI whenever they are changed.
 
 &nbsp;
 
@@ -15,9 +15,9 @@ TeroyJS is a state-based component UI renderer library made up of 100 lines of c
 
 First of all, let me make one thing clear: this is **not** in any way a comparable alternative to other frameworks like React, Vue, Angular etc. However, TeroyJS is an option for the times when you can ask yourself: _"Do i really need a big framework like React or Vue for this small, simple thing(s)?"_
 
-TeroyJS focuses mainly on one thing: **size**. A minified TeroyJS takes only 1.56kb of space on your webpage, which clears up a lot of room for you beautiful code instead. TeroyJS also works silently behind the scenes with the power of JavaScript Proxies and will only update the nescessary DOM-components on state changes. In other words:
+TeroyJS focuses mainly on one thing: **size**. A minified TeroyJS takes only 1.68kb of space on your webpage, which clears up a lot of room for you beautiful code instead. TeroyJS also works silently behind the scenes with the power of JavaScript Proxies and will only update the nescessary DOM-components on state changes. There's no virtual DOM (like in React), and the speed of TeroyJS is not limited by thousands of line with code. In other words:
 
-TeroyJS is lightweight and very reactive.
+TeroyJS is very lightweight and reactive.
 
 &nbsp;
 
@@ -31,7 +31,7 @@ TeroyJS is lightweight and very reactive.
 
 ### With CDN 🌐:
 
-#### `<script src="https://cdn.jsdelivr.net/npm/teroy@0.0.4"></script>`
+#### `<script src="https://cdn.jsdelivr.net/npm/teroy@0.0.5"></script>`
 
 &nbsp;
 
@@ -51,7 +51,7 @@ const myComponent = new Teroy("#app", {
     return `<h1>${this.data.maintitle}</h1>
             <p id=${this.data.id}>Here's todays shopping list:</p>
             <ul>
-              ${this.data.shoppingList.items.map(listItem => `<li>${listItem}</li>`).join("")}
+              ${this.data.shoppingList.items.map((listItem) => `<li>${listItem}</li>`).join("")}
             </ul>`;
   },
 
@@ -59,9 +59,9 @@ const myComponent = new Teroy("#app", {
     maintitle: "This is my big header",
     id: "undertitle",
     shoppingList: {
-      items: ["Milk", "Egg", "Flour", "Beer"]
-    }
-  }
+      items: ["Milk", "Egg", "Flour", "Beer"],
+    },
+  },
 });
 
 myComponent.show();
@@ -77,15 +77,15 @@ const myComponent = new Teroy("#app", {
             <button id="button" ${this.data.disabled}>Add to list</button>
             
             <ul>
-              ${this.data.list.map(listItem => `<li class="item">${listItem} X</li>`).join("")}
+              ${this.data.list.map((listItem) => `<li class="item">${listItem}</li>`).join("")}
             </ul>`;
   },
 
   data: {
     title: "To-do List",
     disabled: "",
-    list: []
-  }
+    list: [],
+  },
 });
 
 myComponent.show();
@@ -138,8 +138,8 @@ const component = new Teroy("#app", {
     return "<h1>My title</h1>";
   },
   data: {
-    myList: ["foo", "bar"]
-  }
+    myList: ["foo", "bar"],
+  },
 });
 ```
 
@@ -157,16 +157,16 @@ const component = new Teroy("#app", {
 const component = new Teroy("#app", {
   render() {
     return `<h1 id="title">My title</h1>
-          ${this.data.myList.map(item => `<p class="thingy">${item}</p>`).join("")}`;
+          ${this.data.myList.map((item) => `<p class="thingy">${item}</p>`).join("")}`;
   },
   data: {
-    myList: ["foo", "bar"]
-  }
+    myList: ["foo", "bar"],
+  },
 });
 
 component.show();
 
 component.select("#title").style.color = "blue";
 
-component.selectAll(".thingy").forEach(p => (p.style.color = "green"));
+component.selectAll(".thingy").forEach((p) => (p.style.color = "green"));
 ```

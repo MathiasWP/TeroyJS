@@ -8,7 +8,7 @@
  * License: MIT
  */
 
-(function() {
+(function () {
   class Teroy {
     constructor(element, component) {
       this.element = document.querySelector(element);
@@ -16,14 +16,14 @@
       if (!this.element) {
         throw `TEROY: ${element} not found.`;
       }
-      if (!component.render) {
+      if (!component.render || typeof component.render !== "function") {
         throw "TEROY: No render() function found in component.";
       }
       if (typeof component.render() !== "string") {
-        throw "TEROY: Please return a string from the render() function.";
+        throw "TEROY: Please make sure that the return from the render() function is wrapped in template literals (or any other string primitive).";
       }
 
-      this.html = component.render || "";
+      this.html = component.render;
 
       this.rendered = false;
 
@@ -44,7 +44,7 @@
             }
             return target[value];
           }
-        }
+        },
       });
     }
 
@@ -66,7 +66,7 @@
       }
       this.DOM = this.parse(this.html());
 
-      Array.from(this.DOM.body.childNodes).forEach(child => {
+      Array.from(this.DOM.body.childNodes).forEach((child) => {
         this.element.appendChild(child);
       });
 
@@ -81,7 +81,7 @@
       const OLDDOMCHILDREN = Array.from(this.element.childNodes);
       const NEWDOMCHILDREN = Array.from(this.DOM.querySelector("body").childNodes);
 
-      const maxLength = Math.max(OLDDOMCHILDREN.length, NEWDOMCHILDREN.length);
+      console.log(this.element, this.DOM.querySelector("body"));
 
       for (let i = 0; i < maxLength; i++) {
         if (!OLDDOMCHILDREN[i]) {
@@ -99,7 +99,7 @@
     }
   }
   if (typeof define === "function" && define.amd) {
-    define(function() {
+    define(function () {
       return Teroy;
     });
   } else if (typeof module !== "undefined" && module.exports) {
