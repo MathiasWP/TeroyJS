@@ -26,7 +26,6 @@
       }
 
       this.html = component.render;
-
       this.rendered = false;
 
       this.data = new Proxy(component.data || {}, {
@@ -77,11 +76,12 @@
 
     update() {
       this.proxyPaused = true;
-
       this.DOM = this.parse(this.html.apply(this));
 
       const OLDDOMCHILDREN = Array.from(this.element.childNodes);
       const NEWDOMCHILDREN = Array.from(this.DOM.querySelector("body").childNodes);
+
+      const maxLength = Math.max(OLDDOMCHILDREN, NEWDOMCHILDREN);
 
       for (let i = 0; i < maxLength; i++) {
         if (!OLDDOMCHILDREN[i]) {
