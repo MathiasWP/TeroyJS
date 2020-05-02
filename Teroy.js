@@ -73,12 +73,6 @@
       this.rendered = true;
     }
 
-    /**
-     * 
-     * @param {NamedNodeMap} newAttrs 
-     * @param {NamedNodeMap} oldAttrs 
-     * @param {Node} node
-     */
     diffAttributes(newAttrs, oldAttrs, node) {
       if (newAttrs === oldAttrs) return;
       const allAttrs = new Set([...newAttrs, ...oldAttrs].map(i => i.name));
@@ -93,12 +87,6 @@
       }
     }
 
-    /**
-     * 
-     * @param {Node} newNode 
-     * @param {Node} oldNode 
-     * @param {Node} root 
-     */
     diff(newNode, oldNode, root) {
       if (!oldNode) return root.appendChild(n);
       if (!newNode) return root.removeChild(o);
