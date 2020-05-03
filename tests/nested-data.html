@@ -40,9 +40,12 @@
 
         myComponent.show();
 
+
         setTimeout(() => {
+            const list = myComponent.data.todos.todos
             setInterval(() => {
-                myComponent.data.todos.todos.push('beer')
+                list.push('beer')
+                myComponent.data.todos.todos.push('another beer')
             }, 500);
         }, 1000);
     </script>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign variable test</title>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+
+<script src="../Teroy.js"></script>
+<script>
+    const myComponent = new Teroy("#app", {
+        render() {
+            return `<h3>${this.data.todos.listTitle}</h3>
+                    <ul>
+                        ${this.data.todos.todos.map((item) => `<li>${item}</li>`).join("")}
+                    </ul>`;
+        },
+        data: {
+            todos: {
+                listTitle: "Hi",
+                todos: []
+            }
+        }
+    });
+
+    myComponent.show();
+
+    setTimeout(() => {
+        setInterval(() => {
+            myComponent.data.todos.todos.push('foo')
+        }, 1000);
+    }, 2000);
+</script>
+
+</html>

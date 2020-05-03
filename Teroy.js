@@ -19,22 +19,25 @@
 
       this.html = component.render;
       this.rendered = false;
-
-      this.data = new Proxy(component.data || {}, {
-        component: this,
-        set(target, prop, val) {
-          target[prop] = val;
-          this.component.update();
-          return true;
-        },
-        get(target, value) {
-          if (this.component.proxyPaused) return target[value];
-          if (this.component.rendered) window.requestAnimationFrame(() => this.component.update());
-
-          return target[value];
-        },
-      });
+      this.data = new Proxy(component.data || {}, this.handler());
     }
+
+    handler = function () {
+      const component = this;
+      return {
+        get: (obj, prop) => {
+          if (['[object Object]', '[object Array]'].indexOf(Object.prototype.toString.call(obj[prop])) > -1) return new Proxy(obj[prop], component.handler())
+          if (component.proxyPaused) return obj[prop];
+          if (component.rendered) window.requestAnimationFrame(() => component.update());
+          return obj[prop];
+        },
+        set: (obj, prop, value) => {
+          obj[prop] = value;
+          component.update();
+          return true
+        }
+      };
+    };
 
     select(selector) {
       return this.element.querySelector(selector);
@@ -50,7 +53,6 @@
 
     show() {
       if (this.rendered) return console.warn("TEROY: Component is already showing on page, no need to show it again.");
-
       this.DOM = this.parse(this.html());
       Array.from(this.DOM.body.childNodes).forEach(child => this.element.appendChild(child));
       this.rendered = true;
@@ -58,7 +60,7 @@
 
     diffAttributes(newAttrs, oldAttrs, node) {
       if (newAttrs === oldAttrs) return;
-      const allAttrs = new Set([...newAttrs, ...oldAttrs].map(i => i.name));
+      const allAttrs = new Set([Array.from(newAttrs), Array.from(oldAttrs)].map(i => i.name));
 
       for (const attr of allAttrs) {
         const o = oldAttrs.getNamedItem(attr);
@@ -99,7 +101,6 @@
       this.proxyPaused = true;
       this.DOM = this.parse(this.html.apply(this));
       this.diff(this.DOM.body, this.element, this.element);
-
       delete this.proxyPaused;
     }
   }
