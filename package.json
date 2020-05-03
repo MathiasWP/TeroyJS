@@ -4,7 +4,8 @@
   "description": "The smallest JavaScript state-based component UI renderer.",
   "main": "Teroy.min.js",
   "scripts": {
-    "start": "node Teroy.js"
+    "start": "node Teroy.js",
+    "minify": "terser -o Teroy.min.js Teroy.js"
   },
   "repository": {
     "type": "git",
@@ -24,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/MathiasWP/TeroyJS/issues"
   },
-  "homepage": "https://github.com/MathiasWP/TeroyJS#readme"
+  "homepage": "https://github.com/MathiasWP/TeroyJS#readme",
+  "devDependencies": {
+    "terser": "^4.6.13"
+  }
 }
