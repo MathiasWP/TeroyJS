@@ -84,7 +84,7 @@
         const o = OLD_CHILDREN[cur_idx];
         const n = NEW_CHILDREN[cur_idx];
 
-        if (o === n || n.isEqualNode(o)) continue;
+        if (o === n || o && n && n.isEqualNode(o)) continue;
         if (!o) root.appendChild(n);
         else if (!n) root.removeChild(o);
         else if (n.nodeType !== o.nodeType || n.nodeName !== o.nodeName || n.nodeValue !== o.nodeValue) root.replaceChild(n, o);
