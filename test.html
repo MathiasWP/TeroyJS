@@ -16,9 +16,9 @@
             const myComponent = new Teroy("#app", {
                 render() {
                     return `<h1>${this.data.title}</h1>
-                <form id="input-form">
-                    <input id="input" ${this.data.disabled}>
-                    <button id="button" ${this.data.disabled}>Add to list</button>
+                    <form id="input-form">
+                        <input id="input" ${this.data.disabled}>
+                        <button id="button" ${this.data.disabled}>Add to list</button>
                     </form>
                     <ul>
                         ${this.data.list.map((listItem) => `
@@ -37,6 +37,7 @@
                     title: "To-do List",
                     disabled: "",
                     list: [],
+                    counter: 0
                 },
             });
 
@@ -45,15 +46,25 @@
             myComponent.select("#input-form").addEventListener("submit", (e) => {
                 e.preventDefault()
                 const inputValue = myComponent.select("#input").value;
+
+                myComponent.data.counter += 1;
+
                 myComponent.data.list.push({ value: inputValue, complete: false, id: (Math.round(Math.random() * Date.now())).toString(16) });
 
-
-                if (myComponent.data.list.length >= 10) {
+                if (myComponent.data.list.length === myComponent.data.counter && myComponent.data.counter >= 6) {
                     myComponent.data.title = "Done List!";
                     myComponent.data.disabled = "disabled";
                     myComponent.data.list[1] = ({ value: 'I WAS CHANGED', complete: false, id: (Math.round(Math.random() * Date.now())).toString(16) })
+
                     Object.assign(myComponent.data.list[0], { value: 'ASSIGNED' })
+
                     myComponent.data.list.length = 3;
+
+                    const lastItem = myComponent.data.list.pop();
+                    lastItem.value = 'I AM THE LAST ONE'
+
+                    myComponent.data.list.push(lastItem)
+
                 }
             });
 
