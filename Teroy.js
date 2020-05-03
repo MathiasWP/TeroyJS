@@ -13,15 +13,9 @@
     constructor(element, component) {
       this.element = document.querySelector(element);
 
-      if (!this.element) {
-        throw `TEROY: ${element} not found.`;
-      }
-      if (!component.render || typeof component.render !== "function") {
-        throw "TEROY: No render() function found in component.";
-      }
-      if (typeof component.render() !== "string") {
-        throw "TEROY: Please make sure that the return from the render() function is wrapped in template literals (or any other string primitive).";
-      }
+      if (!this.element) throw `TEROY: ${element} not found.`;
+      if (!component.render || typeof component.render !== "function") throw "TEROY: No render() function found in component.";
+      if (typeof component.render() !== "string") throw "TEROY: Please make sure that the return from the render() function is wrapped in template literals (or any other string primitive).";
 
       this.html = component.render;
       this.rendered = false;
@@ -34,16 +28,10 @@
           return true;
         },
         get(target, value) {
-          if (this.component.proxyPaused) {
-            return target[value];
-          } else {
-            if (this.component.rendered) {
-              window.requestAnimationFrame(() => {
-                this.component.update();
-              });
-            }
-            return target[value];
-          }
+          if (this.component.proxyPaused) return target[value];
+          if (this.component.rendered) window.requestAnimationFrame(() => this.component.update());
+
+          return target[value];
         },
       });
     }
@@ -61,15 +49,10 @@
     }
 
     show() {
-      if (this.rendered) {
-        return console.warn("TEROY: Component is already showing on page, no need to show it again.");
-      }
+      if (this.rendered) return console.warn("TEROY: Component is already showing on page, no need to show it again.");
+
       this.DOM = this.parse(this.html());
-
-      Array.from(this.DOM.body.childNodes).forEach((child) => {
-        this.element.appendChild(child);
-      });
-
+      Array.from(this.DOM.body.childNodes).forEach(child => this.element.appendChild(child));
       this.rendered = true;
     }
 
@@ -100,21 +83,20 @@
       while (++cur_idx < MAX) {
         const o = OLD_CHILDREN[cur_idx];
         const n = NEW_CHILDREN[cur_idx];
-        
-        if (o === n || n.isEqualNode(o)) continue; // nodes are the same reference and value
-        if (!o) root.appendChild(n); // old not does not exist
-        else if (!n) root.removeChild(o); // new node does not exist
-        else if (n.nodeType !== o.nodeType || n.nodeName !== o.nodeName || n.nodeValue !== o.nodeValue) root.replaceChild(n, o); // nodes are of different type or name
+
+        if (o === n || n.isEqualNode(o)) continue;
+        if (!o) root.appendChild(n);
+        else if (!n) root.removeChild(o);
+        else if (n.nodeType !== o.nodeType || n.nodeName !== o.nodeName || n.nodeValue !== o.nodeValue) root.replaceChild(n, o);
         else {
             this.diffAttributes(n.attributes, o.attributes, o);
             this.diff(n, o, o)
         }
-      } 
+      }
     }
 
     update() {
       this.proxyPaused = true;
-
       this.DOM = this.parse(this.html.apply(this));
       this.diff(this.DOM.body, this.element, this.element);
 

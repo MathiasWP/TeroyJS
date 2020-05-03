@@ -15,7 +15,7 @@ TeroyJS is a state-based component UI renderer library made up of 100 lines of c
 
 First of all, let me make one thing clear: this is **not** in any way a comparable alternative to other frameworks like React, Vue, Angular etc. However, TeroyJS is an option for the times when you can ask yourself: _"Do i really need a big framework like React or Vue for this small, simple thing(s)?"_
 
-TeroyJS focuses mainly on one thing: **size**. A minified TeroyJS takes only 2608 bytes (2.6kb, 1.08kb gzip) of space on your webpage, which clears up a lot of room for you beautiful code instead. TeroyJS also works silently behind the scenes with the power of JavaScript Proxies and will only update the nescessary DOM-components on state changes. There's no virtual DOM (like in React), and the speed of TeroyJS is not limited by thousands of line with code. In other words:
+TeroyJS focuses mainly on one thing: **size**. A minified TeroyJS takes only 2592 bytes (2.6kb, 1.07kb gzip) of space on your webpage, which clears up a lot of room for you beautiful code instead. TeroyJS also works silently behind the scenes with the power of JavaScript Proxies and will only update the nescessary DOM-components on state changes. There's no virtual DOM (like in React), and the speed of TeroyJS is not limited by thousands of line with code. In other words:
 
 TeroyJS is very lightweight and reactive.
 
@@ -75,7 +75,7 @@ const myComponent = new Teroy("#app", {
     return `<h1>${this.data.title}</h1>
             <input id="input" ${this.data.disabled}>
             <button id="button" ${this.data.disabled}>Add to list</button>
-            
+
             <ul>
               ${this.data.list.map((listItem) => `<li class="item">${listItem}</li>`).join("")}
             </ul>`;
