@@ -5,7 +5,6 @@
   "main": "Teroy.min.js",
   "scripts": {
     "start": "node Teroy.js",
-    "countlines": "npx terser Teroy.js --comments false | npx prettier --stdin-filepath '.js' --print-width 9999 | wc -l",
     "minify": "terser -o Teroy.min.js Teroy.js"
   },
   "repository": {
@@ -28,7 +27,6 @@
   },
   "homepage": "https://github.com/MathiasWP/TeroyJS#readme",
   "devDependencies": {
-    "prettier": "^2.0.5",
     "terser": "^4.6.13"
   }
 }
