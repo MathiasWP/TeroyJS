@@ -89,8 +89,8 @@
         else if (!n) root.removeChild(o);
         else if (n.nodeType !== o.nodeType || n.nodeName !== o.nodeName || n.nodeValue !== o.nodeValue) root.replaceChild(n, o);
         else {
-            this.diffAttributes(n.attributes, o.attributes, o);
-            this.diff(n, o, o)
+          this.diffAttributes(n.attributes, o.attributes, o);
+          this.diff(n, o, o)
         }
       }
     }

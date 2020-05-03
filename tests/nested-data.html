@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script src="/Teroy.js"></script>
+
+    <script>
+        /**
+         * This test makes sure that nested objects in the data property of components work as expected.
+         * Only the affected components should become updated.
+         */
+
+
+        const myComponent = new Teroy("#app", {
+            render() {
+                return `
+                    <h3>${this.data.todos.listTitle}</h3>
+ 
+                    <ul>
+                        ${this.data.todos.todos.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+
+                    `;
+            },
+
+            data: {
+                todos: {
+                    listTitle: 'Hi',
+                    todos: []
+                }
+            },
+        });
+
+        myComponent.show();
+
+        setTimeout(() => {
+            setInterval(() => {
+                myComponent.data.todos.todos.push('beer')
+            }, 500);
+        }, 1000);
+    </script>
+</body>
+
+</html>

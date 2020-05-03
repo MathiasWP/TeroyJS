@@ -18,7 +18,11 @@
     "render",
     "reactive",
     "proxy",
-    "javascript"
+    "javascript",
+    "framework",
+    "es6",
+    "component",
+    "teroy"
   ],
   "author": "Mathias Picker",
   "license": "MIT",

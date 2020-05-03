@@ -11,6 +11,13 @@
 <body>
     <div id="app"></div>
     <script>
+        /**
+         * This test makes sure that different SET/GET methods work as expected.
+         * Only the affected components should become updated.
+         * When the list has 6 or more items, it should be disabled and altered to
+         * a changed list with length 3. This should be updated in the UI.
+         */
+
         document.addEventListener('DOMContentLoaded', main);
         function main() {
             const myComponent = new Teroy("#app", {
@@ -49,12 +56,14 @@
 
                 myComponent.data.counter += 1;
 
-                myComponent.data.list.push({ value: inputValue, complete: false, id: (Math.round(Math.random() * Date.now())).toString(16) });
+                let id = (Math.round(Math.random() * Date.now())).toString(16)
+
+                myComponent.data.list.push({ value: inputValue, complete: false, id });
 
                 if (myComponent.data.list.length === myComponent.data.counter && myComponent.data.counter >= 6) {
                     myComponent.data.title = "Done List!";
                     myComponent.data.disabled = "disabled";
-                    myComponent.data.list[1] = ({ value: 'I WAS CHANGED', complete: false, id: (Math.round(Math.random() * Date.now())).toString(16) })
+                    myComponent.data.list[1] = ({ value: 'I WAS CHANGED', complete: false, id })
 
                     Object.assign(myComponent.data.list[0], { value: 'ASSIGNED' })
 
