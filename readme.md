@@ -31,7 +31,7 @@ TeroyJS is very lightweight and reactive.
 
 ### With CDN 🌐:
 
-#### `<script src="https://cdn.jsdelivr.net/npm/teroy@0.2.0"></script>`
+#### `<script src="https://cdn.jsdelivr.net/npm/teroy@0.2.1"></script>`
 
 &nbsp;
 
@@ -104,13 +104,22 @@ myComponent.select("#button").addEventListener("click", () => {
 
 TeroyJS also updates the properties and attributes of rendered items when their data changes. TeroyJS also works with nested objects/arrays - as well as assigning these to their own variables:
 
+&nbsp;
+
+## Working with variables in TeroyJS
+
+All types of changes directly on the components data object will be updated; in other words, when you don't assign the properties to their own variables, everything will work
+as "normal/expected". Look at the example above to see this in action. 
+
 ### NOTE FOR ASSIGING "data" PROPERTIES TO THEIR OWN VARIABLES:
 
 **Whenever you decide to assign a property from the components data-object follow this one rule:**
 
-All variables created has to be a `const`. This is to make sure that the correct types of properties are assigned.
-As you can see in the full example below is it possible to assign the Array `todos` to its own variable. However, the property
-`listTitle` cannot be assigned to its own variable because it not an Array or Object. If it is, then changing its value will not be updated in `data`.
+**All variables created has to be a `const`.**
+
+This is to make sure that the correct types of methods on the variables are allowed.
+As you can see in the full example below is it possible to assign the Array `todos` to its own variable and push to it. However, the property
+`listTitle` cannot be assigned to its own variable, becausause if it is, then changing its value will not be updated in `data`.
 Therefore by creating all variables with `const` can you make sure that no shady business can happen. So if you want to update the `listTitle` value so
 that it also updates in the UI do it like this:
 
@@ -118,6 +127,8 @@ that it also updates in the UI do it like this:
 const todos = myComponent.todos;
 todos.listTitle = "My new title"
 ```
+
+Other methods that requires the same approach as above are: _Replacing an array (array1 = array2)_ (please report an issue if you find more)
 
 ### Full example:
 

@@ -49,6 +49,10 @@
         todosTitle = 'This will not be updated; todosTitle is not a const, and if it was, then this would not be allowed.';
         data.push("more beer");
         data.push("more beer");
+
+        todos.todos = [1, 2, 3, 4, 5]
+        data[1] = 'this will not work'
+        todos.todos[3] = 'hello'
     }, 500);
 
     console.log("Website should display: 2 beers and 2 more beers. Title should become 'New title'.")
