@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>List with states test</title>
     <script defer src="/Teroy.js"></script>
 </head>
 
@@ -33,7 +33,7 @@
                                 id="${listItem.id}"
                                 ${listItem.complete ? "data-is-complete" : ""}
                                 class="item ${listItem.complete ? 'item-complete' : ''}"
-                            >
+                                >
                                 ${listItem.value}
                                 ${listItem.complete ? "(complete)" : ""}
                             </li>`).join("")}

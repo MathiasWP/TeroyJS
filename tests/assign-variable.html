@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assign variable</title>
+    <title>Assign variable test</title>
 </head>
 
 <body>
@@ -39,12 +39,12 @@
 
     const todos = myComponent.data.todos
 
-    todos.listTitle = 'New title'
-
     setTimeout(() => {
+        todos.listTitle = 'New title'
+
         data.push("more beer");
         data.push("more beer");
-    }, 200);
+    }, 500);
 
     console.log("Website should display: 2 beers and 2 more beers")
 </script>

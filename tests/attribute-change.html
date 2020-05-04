@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single attribute change</title>
+</head>
+
+<body>
+    <div id="app">
+    </div>
+</body>
+<script src="../Teroy.js"></script>
+<script>
+    const myComponent = new Teroy('#app', {
+        render() {
+            return `
+            <img src="${this.data.attributes.image.src}" alt="${this.data.attributes.image.alt}">
+            <p>Here's ${this.data.attributes.image.description}</p>
+            `
+        },
+        data: {
+            attributes: {
+                image: {
+                    src: "https://www.lifeinnorway.net/wp-content/uploads/2019/12/coffee-featured-image.jpg",
+                    alt: 'Coffe cup',
+                    description: 'an image of a coffe-cup'
+                }
+            }
+        }
+    })
+    myComponent.show()
+
+    const image = myComponent.data.attributes.image
+
+
+    setTimeout(() => {
+        console.log('change')
+        image.src = ""
+        image.alt = 'WHOOPSIE, IMAGE GONE!'
+        image.description = 'NOT an image of a coffe-cup'
+    }, 1000);
+</script>
+
+</html>

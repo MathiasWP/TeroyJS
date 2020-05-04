@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Nested data test</title>
 </head>
 
 <body>
@@ -21,19 +21,23 @@
         const myComponent = new Teroy("#app", {
             render() {
                 return `
-                    <h3>${this.data.todos.listTitle}</h3>
- 
-                    <ul>
-                        ${this.data.todos.todos.map(item => `<li>${item}</li>`).join('')}
-                    </ul>
+            <h3>${this.data.todos.listTitle}</h3>
 
-                    `;
+            <ul>
+                ${this.data.todos.todosList.map(item =>
+                    `
+                     <li class="item" id="${item.id}" ${item.complete ? "data-is-complete" : ""}>
+                     ${item.name} ${item.complete ? "X" : ""}
+                     </li>
+                    `).join('')}
+            </ul>
+            `;
             },
 
             data: {
                 todos: {
-                    listTitle: 'Hi',
-                    todos: []
+                    listTitle: 'To-do list',
+                    todosList: [{ name: 'Chips', complete: false, id: Date.now().toString() }]
                 }
             },
         });
@@ -41,13 +45,24 @@
         myComponent.show();
 
 
-        setTimeout(() => {
-            const list = myComponent.data.todos.todos
-            setInterval(() => {
-                list.push('beer')
-                myComponent.data.todos.todos.push('another beer')
-            }, 500);
-        }, 1000);
+        const todos = myComponent.data.todos
+        const list = myComponent.data.todos.todosList
+
+        const addItems = setInterval(() => {
+            list.push({ name: 'Beer', complete: false, id: Date.now().toString() })
+
+            if (list.length > 5) {
+                todos.listTitle += ' done!'
+                clearInterval(addItems)
+            }
+        }, 500);
+
+        document.addEventListener('click', e => {
+            if (!e.target.matches('.item')) return;
+            const item = list.find(i => i.id === e.target.id)
+
+            item.complete = !item.complete;
+        })
     </script>
 </body>
 

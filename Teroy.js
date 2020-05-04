@@ -1,7 +1,7 @@
 /**
  * Teroy: The smallest JavaScript state-based component UI renderer - "Keepin' it Vanilla."
  * Length: 100 lines.
- * Global support: 93.89% (https://caniuse.com/#feat=proxy)
+ * Global support: 87.96% (https://caniuse.com/#feat=mdn-javascript_operators_spread_spread_in_object_literals)
  * Github: https://github.com/MathiasWP/TeroyJS
  * NPM: https://www.npmjs.com/package/teroy
  * Creator: Mathias Picker.
@@ -22,18 +22,18 @@
       this.data = new Proxy(component.data || {}, this.handler());
     }
 
-    handler = function () {
+    handler() {
       const component = this;
       return {
         get: (obj, prop) => {
-          if (['[object Object]', '[object Array]'].indexOf(Object.prototype.toString.call(obj[prop])) > -1) return new Proxy(obj[prop], component.handler())
+          if (['[object Object]', '[object Array]'].indexOf(Object.prototype.toString.call(obj[prop])) > -1) { return new Proxy(obj[prop], component.handler()) }
           if (component.proxyPaused) return obj[prop];
           if (component.rendered) window.requestAnimationFrame(() => component.update());
           return obj[prop];
         },
         set: (obj, prop, value) => {
-          obj[prop] = value;
           component.update();
+          obj[prop] = value;
           return true
         }
       };
@@ -60,8 +60,7 @@
 
     diffAttributes(newAttrs, oldAttrs, node) {
       if (newAttrs === oldAttrs) return;
-      const allAttrs = new Set([Array.from(newAttrs), Array.from(oldAttrs)].map(i => i.name));
-
+      const allAttrs = new Set([...newAttrs, ...oldAttrs].map(i => i.name));
       for (const attr of allAttrs) {
         const o = oldAttrs.getNamedItem(attr);
         const n = newAttrs.getNamedItem(attr);
@@ -73,6 +72,7 @@
     }
 
     diff(newNode, oldNode, root) {
+
       if (!oldNode) return root.appendChild(n);
       if (!newNode) return root.removeChild(o);
       if (newNode.isEqualNode(oldNode)) return;
