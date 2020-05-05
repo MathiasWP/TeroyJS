@@ -5,7 +5,7 @@
   "main": "Teroy.min.js",
   "scripts": {
     "start": "node Teroy.js",
-    "minify": "terser -o Teroy.min.js Teroy.js"
+    "minify": "terser -o Teroy.polyfill.js Teroy.polyfill.js"
   },
   "repository": {
     "type": "git",
