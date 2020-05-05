@@ -26,7 +26,7 @@
       const component = this;
       return {
         get: (obj, prop) => {
-          if (['[object Object]', '[object Array]'].indexOf(Object.prototype.toString.call(obj[prop])) > -1) { return new Proxy(obj[prop], component.handler()) }
+          if (['[object Object]', '[object Array]'].indexOf(Object.prototype.toString.call(obj[prop])) > -1) return new Proxy(obj[prop], component.handler())
           if (component.proxyPaused) return obj[prop];
           if (component.rendered) window.requestAnimationFrame(() => component.update());
           return obj[prop];
