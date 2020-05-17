@@ -7,7 +7,7 @@
 
 ## **_What is TeroyJS?_**
 
-TeroyJS is a state-based component UI renderer library made up of 100 lines of code; Create components with states, and watch how they automatically are update in your GUI whenever they are changed.
+TeroyJS is a state-based component UI renderer library made up of 100 lines of code; Create components with states, and watch how they automatically are updated in your GUI whenever they are changed.
 
 &nbsp;
 
